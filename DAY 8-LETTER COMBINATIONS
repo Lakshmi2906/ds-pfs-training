@@ -1,0 +1,28 @@
+# LETTER COMBINATIONS OF A NUMBER
+class Solution {
+    List<String> lst;
+    public void generate(StringBuilder str, int ind, char arr[], char ele[][])
+    {
+        if(ind==arr.length)
+        {
+            lst.add(str.toString());
+        }
+        else
+        {
+            for(char ch:ele[arr[ind]-2-'0'])
+            {
+                str.append(ch);
+                generate(str,ind+1,arr,ele);
+                str.deleteCharAt(str.length()-1);
+            }
+        }
+    }
+    public List<String> letterCombinations(String digits) {
+        lst = new ArrayList<>();
+        if(digits.length()==0)
+            return lst;
+        char arr[][]={{'a','b','c'},{'d','e','f'},{'g','h','i'},{'j','k','l'},{'m','n','o'},{'p','q','r','s'},{'t','u','v'},{'w','x','y','z'}};
+        generate(new StringBuilder(),0,digits.toCharArray(),arr);
+        return lst;
+    }
+}
